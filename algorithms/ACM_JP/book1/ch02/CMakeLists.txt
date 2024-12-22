@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION  3.25)
+
+project(main)
+
+include_directories(../common/)
+
+add_executable(2_1_1 2_1_1.cxx)
+add_executable(2_1_2 2_1_2.cxx)
+add_executable(2_1_3 2_1_3.cxx)
+add_executable(2_1_4_1 2_1_4_1.cxx)
+add_executable(2_1_4_2 2_1_4_2.cxx)
+add_executable(2_1_5 2_1_5.cxx)
+add_executable(2_1_6 2_1_6.cxx)
+add_executable(2_2_1 2_2_1.cxx)
+add_executable(2_2_2 2_2_2.cxx)
+add_executable(2_2_3 2_2_3.cxx)
+add_executable(2_2_4_1 2_2_4_1.cxx)
+add_executable(2_2_4_2 2_2_4_2.cxx)
+add_executable(2_3_1_1 2_3_1_1.cxx)
+add_executable(2_3_1_2 2_3_1_2.cxx)
+add_executable(2_3_1_3 2_3_1_3.cxx)
