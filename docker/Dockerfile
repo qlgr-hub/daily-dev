@@ -49,8 +49,8 @@ RUN echo "PermitUserEnvironment yes" >> /etc/ssh/sshd_config && service ssh star
 
 
 # my own proxy settings
-ENV http_proxy=http://192.168.3.126:7890
-ENV https_proxy=http://192.168.3.126:7890
+# ENV http_proxy=http://192.168.3.126:7890
+# ENV https_proxy=http://192.168.3.126:7890
 
 USER root
 
