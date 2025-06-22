@@ -11,13 +11,11 @@ services:
     tty: true
     privileged: true
     ports:
-      - "14222:22"
-      - "14288:8888"
+      - "15822:22"
+      - "15888:8888"
     volumes:
-      - /home/george/workspace/daily_dev:/workspace
+      - /home/george/workspace/daily-dev:/workspace
       - /home/george/.vscode-server/:/home/george/.vscode-server/
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
     deploy:
       resources:
         reservations:
@@ -25,3 +23,4 @@ services:
             - driver: nvidia
               count: "all"
               capabilities: [gpu]
+    command: ["sleep", "infinity"]

@@ -1,5 +1,15 @@
-build/
+*_tmp/
 opensource/
-.ipynb_checkpoints/
+build/
 .vscode/
 .cache/
+.ipynb_checkpoints/
+.empty/
+*.log
+*toolchain/
+simulator/
+*.riscv
+*.dot
+*.ll
+*.s
+*.ast
