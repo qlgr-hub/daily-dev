@@ -3,5 +3,10 @@ CompileFlags:
     - --target=riscv64-unknown-elf
     - -march=rv64gcv_zvfh_zfh
     - -std=c++23
-    - -I/workspace/toolchains/riscv-toolchain/include
+    - -I/workspace/toolchains/riscv-toolchain/lib/gcc/riscv64-unknown-elf/14.2.0/include
+    - -I/workspace/toolchains/riscv-toolchain/riscv64-unknown-elf/include/c++/14.2.0
+    - -I/workspace/toolchains/riscv-toolchain/riscv64-unknown-elf/include/c++/14.2.0/riscv64-unknown-elf
     - -I/workspace/toolchains/riscv-toolchain/riscv64-unknown-elf/include
+    - -nostdinc
+    - -nostdinc++
+    - -menable-experimental-extensions
