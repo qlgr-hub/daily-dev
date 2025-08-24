@@ -1,4 +1,5 @@
-FROM nvcr.io/nvidia/cuda:12.6.0-cudnn-devel-ubuntu24.04
+# FROM nvcr.io/nvidia/cuda:12.6.0-cudnn-devel-ubuntu24.04
+FROM nvcr.io/nvidia/cuda:12.9.1-cudnn-devel-ubuntu24.04
 
 # Timezone settings
 ENV TIME_ZONE=Asia/Shanghai 
@@ -6,8 +7,8 @@ RUN ln -snf /usr/share/zoneinfo/$TIME_ZONE /etc/localtime && echo $TIME_ZONE > /
 
 
 # My own proxy settings
-ENV http_proxy=http://192.168.3.126:7890
-ENV https_proxy=http://192.168.3.126:7890
+# ENV http_proxy=http://192.168.3.126:7890
+# ENV https_proxy=http://192.168.3.126:7890
 
 
 # Install necessary tools
@@ -45,9 +46,10 @@ WORKDIR /tmp
 
 
 # Install TensorRT
-RUN wget https://developer.nvidia.com/downloads/compute/machine-learning/tensorrt/10.7.0/tars/TensorRT-10.7.0.23.Linux.x86_64-gnu.cuda-12.6.tar.gz \
-    && tar -xf TensorRT-10.7.0.23.Linux.x86_64-gnu.cuda-12.6.tar.gz \
-    && cp -a TensorRT-10.7.0.23/lib/*.so* /usr/lib/x86_64-linux-gnu 
+RUN wget https://developer.nvidia.com/downloads/compute/machine-learning/tensorrt/10.13.2/tars/TensorRT-10.13.2.6.Linux.x86_64-gnu.cuda-12.9.tar.gz
+RUN tar -xf TensorRT-10.13.2.6.Linux.x86_64-gnu.cuda-12.9.tar.gz \
+    && cp -a TensorRT-10.13.2.6/lib/*.so* /usr/lib64 
+    #  && pip install TensorRT-10.13.2.6/python/tensorrt-10.13.2.6-cp312-none-linux_x86_64.whl
 
 
 # Download NGC client
@@ -82,15 +84,20 @@ ENV TVM_HOME="/workspace/opensource/tvm"
 ENV TVM_CONFIGS_JSON_DIR="${TVM_HOME}/configs/host"
 ENV TVM_LOG_DEBUG="ir/transform.cc=1,relay/ir/transform.cc=1"
 ENV PYTHONPATH="${TVM_HOME}/python:${PYTHONPATH}"
-ENV PATH="${PATH}:/usr/local/cuda/bin/:/usr/local/bin/ngc-cli"
+ENV TRT_LIBPATH /usr/lib/x86_64-linux-gnu
+ENV TRT_OSSPATH /workspace/opensource/TensorRT
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${TRT_OSSPATH}/build/out:${TRT_LIBPATH}"
+ENV PATH="/workspace/opensource/TensorRT/build/out:${PATH}:/usr/local/cuda/bin/:/usr/local/bin/ngc-cli"
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/cuda/lib64/"
-
 
 # Clean up
 RUN rm -rf /tmp/* && apt autopurge -y && apt autoclean -y
 
+USER george
+WORKDIR /workspace
+
+# RUN python -m venv ./pyenv
 
 EXPOSE 22
 EXPOSE 8888
-WORKDIR /home/george
 CMD ["sleep", "infinity"]

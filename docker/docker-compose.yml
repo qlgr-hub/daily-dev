@@ -15,7 +15,7 @@ services:
       - "15888:8888"
     volumes:
       - /home/george/workspace/daily-dev:/workspace
-      - /home/george/.vscode-server/:/home/george/.vscode-server/
+      - /home/george/workspace/vscode-server-containers/daily-dev/.vscode-server:/home/george/.vscode-server/
     deploy:
       resources:
         reservations:

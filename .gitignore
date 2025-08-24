@@ -5,6 +5,7 @@ build/
 .cache/
 .ipynb_checkpoints/
 .empty/
+pyenv/
 *.log
 *toolchain/
 simulator/
